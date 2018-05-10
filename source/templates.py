@@ -17,4 +17,12 @@ answer = '''
 
 *Direct distance:* {direct} km
 *Travel time by car:* {car_time}
+➖➖➖➖➖➖➖➖➖➖
+*ADDITIONAL INFO*
+
+*Nearly capitals:* {near}
+'''
+
+greeting = '''
+Send your location through phone, or type some address.
 '''

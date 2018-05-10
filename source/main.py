@@ -1,8 +1,10 @@
-import telebot
+import os
 import utils
+import telebot
+from templates import greeting
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
-bot = telebot.TeleBot('') # TODO
+bot = telebot.TeleBot(os.environ.get('token'))
 bot.skip_pending = True
 
 
@@ -10,7 +12,7 @@ bot.skip_pending = True
 def start(message):
 	keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 	keyboard.add(KeyboardButton(text='Send location', request_location=True))
-	bot.send_message(message.chat.id, 'hello', reply_markup=keyboard)
+	bot.send_message(message.chat.id, greeting, reply_markup=keyboard)
 
 
 @bot.message_handler(content_types=['location'])
@@ -26,4 +28,4 @@ def handle_address(message):
 
 
 if __name__ == '__main__':
-	bot.polling()
+	bot.polling(none_stop=True, timeout=1000)
