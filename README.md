@@ -1,4 +1,4 @@
-# Capital Hound
+# Capital Hound (Eleks.Internship)
 ## Estimate - 120h (160h with additional challenges)
 Розробити додаток для знаходження столиці країни в залежності від початкової точки.
 
@@ -16,3 +16,6 @@
 ### Додатково:
 Вивести список з 3-ох найближчих столиць і перелічену вище статистику для них. Наприклад для Івано-Франківська це будуть Варшава, Будапешт та Київ.
 Для розробки потрібно використати існуючі API для геолокації.
+
+
+#### Previous Internship: https://github.com/P-Alban/Eleks.Internship.Slavik_Pankovych
