@@ -1,4 +1,4 @@
-# Capital Hound (Eleks.Internship)
+# [Capital Hound](https://t.me/capital_houndbot) (Eleks.Internship)
 ## Estimate - 120h (160h with additional challenges)
 Розробити додаток для знаходження столиці країни в залежності від початкової точки.
 
