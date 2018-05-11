@@ -45,8 +45,7 @@ def capital_loc(capital):
 
 def csv_reader(path='source/countries.csv'):
     with CsvReader(path) as csv_object:
-        for line in csv_object:
-            yield line
+        yield from csv_object
 
 
 def get_city(data):
