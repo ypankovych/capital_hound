@@ -5,6 +5,7 @@ geopy==1.13.0
 googlemaps==2.5.1
 idna==2.6
 pyTelegramBotAPI==3.6.2
+redis==2.10.6
 requests==2.18.4
 six==1.11.0
 urllib3==1.22

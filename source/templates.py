@@ -26,3 +26,5 @@ answer = '''
 greeting = '''
 Send your location through phone, or type some address.
 '''
+
+flood_msg = 'Wait {} seconds before sending a new request'

@@ -1,11 +1,24 @@
 import os
-import utils
+import redis
 import telebot
-from templates import greeting
+from functools import wraps
+from templates import greeting, flood_msg
+from utils import by_coordinates, by_address
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 bot = telebot.TeleBot(os.environ.get('token'))
-bot.skip_pending = True
+
+
+def cache(func):
+	@wraps(func)
+	def wrapper(message):
+		r = redis.from_url(os.environ.get("REDIS_URL"))
+		user = message.chat.id
+		if not r.get(user):
+			r.set(user, None, ex=15)
+			return func(message)
+		return flood_wait(user, r.ttl(user))
+	return wrapper
 
 
 @bot.message_handler(commands=['start'])
@@ -16,16 +29,23 @@ def start(message):
 
 
 @bot.message_handler(content_types=['location'])
+@cache
 def handle_locate(message):
-	bot.send_message(message.chat.id, text=utils.by_coordinates(message.location.latitude, message.location.longitude),
+	bot.send_message(message.chat.id, text=by_coordinates(message.location.latitude, message.location.longitude),
     	parse_mode='Markdown')
 
 
 @bot.message_handler()
+@cache
 def handle_address(message):
-	result = utils.by_address(message.text)
+	result = by_address(message.text)
 	bot.send_message(message.chat.id, result, parse_mode='Markdown')
 
 
+def flood_wait(user_id, seconds):
+    bot.send_message(user_id, flood_msg.format(seconds))
+
+
 if __name__ == '__main__':
+	bot.skip_pending = True
 	bot.polling(none_stop=True, timeout=1000)

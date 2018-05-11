@@ -1,16 +1,29 @@
 import os
 import googlemaps
-from nearly import haversine
 from templates import answer
 from managers import CsvReader
 from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 from googlemaps.elevation import elevation
+from math import radians, cos, sin, asin, sqrt
 from collections import namedtuple, defaultdict
 
 geolocator = Nominatim()
 gmaps = googlemaps.Client(key=os.environ.get('google_key'))
 capital_dist = namedtuple('Distance', ['name', 'distance'])
+
+
+def haversine(lat1, lon1, lat2, lon2):
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(radians, (lon1, lat1, lon2, lat2))
+
+    # haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * asin(sqrt(a))
+    km = 6367 * c
+    return km
 
 
 def nearly_capitals(lat, long):
