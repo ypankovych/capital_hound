@@ -18,4 +18,4 @@
 Для розробки потрібно використати існуючі API для геолокації.
 
 
-#### Previous Internship: https://github.com/P-Alban/Eleks.Internship.Slavik_Pankovych
+#### Previous Internship: https://github.com/P-Alban/Eleks.Internship
